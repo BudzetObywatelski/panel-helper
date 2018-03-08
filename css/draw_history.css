@@ -1,56 +1,56 @@
 /* draw history + groups stats */
 .draw-history-container {
-	float: right;
-	width: content-box;
-	border: 1px solid #a8d2e3;
-	box-sizing: border-box;
-	margin: 0 0 1em 1em;
+    float: right;
+    width: content-box;
+    border: 1px solid #a8d2e3;
+    box-sizing: border-box;
+    margin: 0 0 1em 1em;
 }
 
 .group-stats-container {
-	float:left;
-	border: 1px solid #a8d2e3;
-	box-sizing: border-box;
-	margin: 0 0 1em;
+    float:left;
+    border: 1px solid #a8d2e3;
+    box-sizing: border-box;
+    margin: 0 0 1em;
 }
 #search {
-	clear: left;
+    clear: left;
 }
 .group-stats-container ul {
-	display: block;
-	margin: 0;
-	padding: 0;
-	padding: 1em;
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding: 1em;
 }
 .group-stats-container li {
-	display: inline-block;
+    display: inline-block;
 }
 .group-stats-container li:after {
-	content: " • ";
+    content: " • ";
 }
 .group-stats-container li:last-child:after {
-	display:none;
+    display:none;
 }
 
 .group-stats-container h3,
 .draw-history-container h3 {
-	font-size: 100%;
-	margin: 0;
-	padding: .5em;
-	border-bottom: 1px solid #a8d2e3;
+    font-size: 100%;
+    margin: 0;
+    padding: .5em;
+    border-bottom: 1px solid #a8d2e3;
 }
 .draw-history ul {
-	padding: 0 1em 0 1.5em;
+    padding: 0 1em 0 1.5em;
 }
 .draw-history li {
-	list-style: none;
+    list-style: none;
 }
 .draw-history li:before {
-	content: "🕑 ";
+    content: "🕑 ";
 }
 .draw-history .profile-data:after {
-	content: ", ";
+    content: ", ";
 }
 .draw-history .profile-data.last:after {
-	display:none;
+    display:none;
 }

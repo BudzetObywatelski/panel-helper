@@ -9,28 +9,30 @@
  *
  * @type DrawHelper
  */
-var drawHelper = new DrawHelper({
-	integersToDraw: 6
-	, rowNumberCell: 0	// index of the cell that contains row numbers (local)
-	, keyCell: 1		// index of the cell that contains ids (global)
-	, mock: false		// if true then Math.random will be used rather then Random.org API
-	, tbodySelector: '#content table tbody'
-	, messages: {'':''
-		, 'randomorg failed' : 'Błąd losowania! Losowanie za pomocą Random.org nie powiodłow się.'
-			+'\n\n'
-			+'Sprawdź połączenie z Internetem i spróbuj ponownie. Informacje techniczne znajdują się w konsoli JS.'
-	}
-});
+var drawHelper = new DrawHelper(
+    {
+        integersToDraw: 6
+        , rowNumberCell: 0    // index of the cell that contains row numbers (local)
+        , keyCell: 1        // index of the cell that contains ids (global)
+        , mock: false        // if true then Math.random will be used rather then Random.org API
+        , tbodySelector: '#content table tbody'
+        , messages: {'':''
+            , 'randomorg failed' : 'Błąd losowania! Losowanie za pomocą Random.org nie powiodłow się.'
+            +'\n\n'
+            +'Sprawdź połączenie z Internetem i spróbuj ponownie. Informacje techniczne znajdują się w konsoli JS.'
+        }
+    }
+);
 
 function DrawHelper(config)
 {
-	this.config = config;
-	this.LOG = new Logger('DrawHelper');
+    this.config = config;
+    this.LOG = new Logger('DrawHelper');
 }
 
-DrawHelper.prototype.message = function(code) {
-	var txt = (code in this.config.messages) ? this.config.messages[code] : code;
-	alert(txt);
+DrawHelper.prototype.message = function (code) {
+    var txt = (code in this.config.messages) ? this.config.messages[code] : code;
+    alert(txt);
 };
 
 /**
@@ -38,19 +40,21 @@ DrawHelper.prototype.message = function(code) {
  * 
  * @param {Element} button
  */
-DrawHelper.prototype.onDraw = function(button) {
-	this.draw(document.querySelector(this.config.tbodySelector)).fail(function(){
-		// re-enable upon failure
-		$(button).button("enable");
-	});
-	// disable immediately
-	if (!this.config.mock) {
-		$(button).button("disable");
-	}
+DrawHelper.prototype.onDraw = function (button) {
+    this.draw(document.querySelector(this.config.tbodySelector)).fail(
+        function () {
+            // re-enable upon failure
+            $(button).button("enable");
+        }
+    );
+    // disable immediately
+    if (!this.config.mock) {
+        $(button).button("disable");
+    }
 };
 
-DrawHelper.prototype.getTrimmedContents = function(cell) {
-	return cell.textContent.replace(/^\s+/, '').replace(/\s+$/, '');
+DrawHelper.prototype.getTrimmedContents = function (cell) {
+    return cell.textContent.replace(/^\s+/, '').replace(/\s+$/, '');
 };
 
 /**
@@ -62,20 +66,20 @@ DrawHelper.prototype.getTrimmedContents = function(cell) {
  * @param {NodeList} rows
  * @param {Array} visibleRowNumbers
  */
-DrawHelper.prototype.showOnlyRows = function(rows, visibleRowNumbers) {
-	for (var i = 0; i < rows.length; i++) {
-		var row = rows[i];
-		var cells = row.querySelectorAll('td');
-		var no = parseInt(this.getTrimmedContents(cells[this.config.rowNumberCell]));
-		cells[this.config.rowNumberCell].innerHTML = '<sup>('+no+')<sup>';
-		//var id = this.getTrimmedContents(cells[this.config.keyCell]);
-		if (visibleRowNumbers.indexOf(no) >= 0) {
-			$(row).show();
-		}
-		else {
-			$(row).hide();
-		}
-	}
+DrawHelper.prototype.showOnlyRows = function (rows, visibleRowNumbers) {
+    for (var i = 0; i < rows.length; i++) {
+        var row = rows[i];
+        var cells = row.querySelectorAll('td');
+        var no = parseInt(this.getTrimmedContents(cells[this.config.rowNumberCell]));
+        cells[this.config.rowNumberCell].innerHTML = '<sup>('+no+')<sup>';
+        //var id = this.getTrimmedContents(cells[this.config.keyCell]);
+        if (visibleRowNumbers.indexOf(no) >= 0) {
+            $(row).show();
+        }
+        else {
+            $(row).hide();
+        }
+    }
 };
 
 /**
@@ -83,96 +87,104 @@ DrawHelper.prototype.showOnlyRows = function(rows, visibleRowNumbers) {
  *
  * @param {Element} tableBody Body of the table to be transformed.
  */
-DrawHelper.prototype.draw = function(tableBody) {
-	var deferred = $.Deferred();
+DrawHelper.prototype.draw = function (tableBody) {
+    var deferred = $.Deferred();
 
-	var rows = tableBody.querySelectorAll('tr');
-	var LOG = this.LOG;
-	// validate
-	if (rows.length < this.config.integersToDraw) {
-		LOG.info('not enough rows to make draw feasable');
-		return;
-	}
+    var rows = tableBody.querySelectorAll('tr');
+    var LOG = this.LOG;
+    // validate
+    if (rows.length < this.config.integersToDraw) {
+        LOG.info('not enough rows to make draw feasable');
+        return;
+    }
 
-	var drawFunction = this.config.mock ? 'drawIntegersMock' : 'drawIntegers';
-	// draw numbers and apply to table
-	var _self = this;
-	this[drawFunction](rows.length).done(function(integersArray){
-		_self.showOnlyRows(rows, integersArray);
-		$(tableBody).addClass('hidden-rows');
-		deferred.resolve();
-	}).fail(function(){
-		deferred.reject();
-	});
+    var drawFunction = this.config.mock ? 'drawIntegersMock' : 'drawIntegers';
+    // draw numbers and apply to table
+    var _self = this;
+    this[drawFunction](rows.length).done(
+        function (integersArray) {
+            _self.showOnlyRows(rows, integersArray);
+            $(tableBody).addClass('hidden-rows');
+            deferred.resolve();
+        }
+    ).fail(
+        function () {
+            deferred.reject();
+        }
+    );
 
-	return deferred;
+    return deferred;
 };
 
 /**
  * Draw integers based on the list length.
  *
- * @param {Number} listLength
+ * @param   {Number} listLength
  * @returns {jQuery.Deferred}
- *	on done(integersArray); radom integers
- *	on fail();
+ *    on done(integersArray); radom integers
+ *    on fail();
  */
-DrawHelper.prototype.drawIntegers = function(listLength) {
-	var deferred = $.Deferred();
-	var _self = this;
+DrawHelper.prototype.drawIntegers = function (listLength) {
+    var deferred = $.Deferred();
+    var _self = this;
 
-	randomApi.drawIntegers(1, listLength,  this.config.integersToDraw, false)
-		.done(function(random, signature, responseData){
-			// save draw results (mainly random&signature) to local storage
-			drawHistory.saveRandomApi(responseData.result);
-			// return value
-			deferred.resolve(random.data);
-		})
-		.fail(function(){
-			// show error message
-			_self.message('randomorg failed');
-			// return error
-			deferred.reject();
-		})
-	;
+    randomApi.drawIntegers(1, listLength,  this.config.integersToDraw, false)
+    .done(
+        function (random, signature, responseData) {
+            // save draw results (mainly random&signature) to local storage
+            drawHistory.saveRandomApi(responseData.result);
+            // return value
+            deferred.resolve(random.data);
+        }
+    )
+    .fail(
+        function () {
+            // show error message
+            _self.message('randomorg failed');
+            // return error
+            deferred.reject();
+        }
+    );
 
-	return deferred;
+    return deferred;
 };
 
 /**
  * [MOCK] Draw integers based on the list length.
  *
- * @param {Number} listLength
+ * @param   {Number} listLength
  * @returns {jQuery.Deferred}
- *	on done(integersArray); radom integers
- *	on fail();
+ *    on done(integersArray); radom integers
+ *    on fail();
  */
-DrawHelper.prototype.drawIntegersMock = function(listLength) {
-	var deferred = $.Deferred();
+DrawHelper.prototype.drawIntegersMock = function (listLength) {
+    var deferred = $.Deferred();
 
-	var maxRepetitions = this.config.integersToDraw * this.config.integersToDraw;
+    var maxRepetitions = this.config.integersToDraw * this.config.integersToDraw;
 
-	var randomData = [];
-	for (var i = 0; i < this.config.integersToDraw; i++) {
-		var newInt;
-		var intIsUnique = false;
-		for (var repeat = 0; repeat < maxRepetitions; repeat++) {
-			newInt = quickRandomInt(1, listLength);
-			if (randomData.indexOf(newInt) < 0) {
-				intIsUnique = true;
-				break;
-			}
-		}
-		if (!intIsUnique) {
-			this.LOG.warn('reached maxRepetitions trying to get unique numbers: ', maxRepetitions);
-		}
-		randomData.push(newInt);
-	}
-	this.LOG.info("MOCKED random: ", randomData);
-	deferred.resolve(randomData);
+    var randomData = [];
+    for (var i = 0; i < this.config.integersToDraw; i++) {
+        var newInt;
+        var intIsUnique = false;
+        for (var repeat = 0; repeat < maxRepetitions; repeat++) {
+            newInt = quickRandomInt(1, listLength);
+            if (randomData.indexOf(newInt) < 0) {
+                intIsUnique = true;
+                break;
+            }
+        }
+        if (!intIsUnique) {
+            this.LOG.warn('reached maxRepetitions trying to get unique numbers: ', maxRepetitions);
+        }
+        randomData.push(newInt);
+    }
+    this.LOG.info("MOCKED random: ", randomData);
+    deferred.resolve(randomData);
 
-	return deferred;
+    return deferred;
 };
 
-function quickRandomInt(min, max) {
+function quickRandomInt(min, max) 
+{
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

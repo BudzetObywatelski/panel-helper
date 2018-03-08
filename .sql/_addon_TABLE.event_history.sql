@@ -1,7 +1,6 @@
 --
 -- Struktura tabeli dla tabeli `event_history`
 --
---DROP TABLE IF EXISTS event_history;
 CREATE TABLE IF NOT EXISTS `event_history` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
 

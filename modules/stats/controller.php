@@ -1,53 +1,51 @@
-<?
-	/* @var $pv_controller ModuleController */
+<?php
+    /* @var $pv_controller ModuleController */
 
-	require_once ('./inc/dbConnect.php');
-	require_once ('./inc/db/profile.php');
-	$dbProfile = new dbProfile();
+    require_once './inc/dbConnect.php';
+    require_once './inc/db/profile.php';
+    $dbProfile = new dbProfile();
 
-	//
-	// Przetwarzanie danych
-	//
-	$tplData = array();
+    //
+    // Przetwarzanie danych
+    //
+    $tplData = array();
 
-	// dane użytkownika
-	$tplData['prev'] = array();
-	$pv_choices = array('grupa');
-	foreach ($pv_choices as $choice)
-	{
-		$tplData['prev'][$choice] = (!empty($_POST[$choice])) ? $_POST[$choice] : (!empty($_GET[$choice]) ? $_GET[$choice] : '');
-	}
-	if (empty($tplData['prev']['grupa']))
-	{
-		$tplData['prev']['grupa'] = array();
-	}
+    // dane użytkownika
+    $tplData['prev'] = array();
+    $pv_choices = array('grupa');
+foreach ($pv_choices as $choice)
+{
+    $tplData['prev'][$choice] = (!empty($_POST[$choice])) ? $_POST[$choice] : (!empty($_GET[$choice]) ? $_GET[$choice] : '');
+}
+if (empty($tplData['prev']['grupa'])) {
+    $tplData['prev']['grupa'] = array();
+}
 
-	// filtrowanie po grupie
-	$pv_ograniczeniaStats = array();
-	if (!empty($tplData['prev']['grupa']))
-	{
-		$pv_ograniczeniaStats['grupa'] = array('IN', $tplData['prev']['grupa']);
-	}
-	// statystyki
-	$tplData['stats'] = array();
-	$dbProfile->pf_getStats($tplData['stats']['miejsce'], 'miejsce', $pv_ograniczeniaStats);
-	$dbProfile->pf_getStats($tplData['stats']['wyksztalcenie'], 'wyksztalcenie', $pv_ograniczeniaStats);
-	$dbProfile->pf_getStats($tplData['stats']['plec'], 'plec', $pv_ograniczeniaStats);
-	$dbProfile->pf_getStats($tplData['stats']['wiek'], 'wiek', $pv_ograniczeniaStats);
+    // filtrowanie po grupie
+    $pv_ograniczeniaStats = array();
+if (!empty($tplData['prev']['grupa'])) {
+    $pv_ograniczeniaStats['grupa'] = array('IN', $tplData['prev']['grupa']);
+}
+    // statystyki
+    $tplData['stats'] = array();
+    $dbProfile->pf_getStats($tplData['stats']['miejsce'], 'miejsce', $pv_ograniczeniaStats);
+    $dbProfile->pf_getStats($tplData['stats']['wyksztalcenie'], 'wyksztalcenie', $pv_ograniczeniaStats);
+    $dbProfile->pf_getStats($tplData['stats']['plec'], 'plec', $pv_ograniczeniaStats);
+    $dbProfile->pf_getStats($tplData['stats']['wiek'], 'wiek', $pv_ograniczeniaStats);
 
-	switch ($pv_controller->action)
-	{
-		case 'wykresy':
-			$pv_controller->tpl->file = 'charts.tpl.php';
-		break;
-		default:
-			$pv_controller->tpl->file = 'stats.tpl.php';
-		break;
-	}
-	$pv_controller->tpl->data = $tplData;
+    switch ($pv_controller->action)
+    {
+case 'wykresy':
+    $pv_controller->tpl->file = 'charts.tpl.php';
+    break;
+default:
+    $pv_controller->tpl->file = 'stats.tpl.php';
+    break;
+    }
+    $pv_controller->tpl->data = $tplData;
 
-	//
-	// Wyświetlanie template
-	//
-	$pv_controller->tpl->render();
+    //
+    // Wyświetlanie template
+    //
+    $pv_controller->tpl->render();
 ?>

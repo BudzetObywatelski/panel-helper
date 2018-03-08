@@ -9,33 +9,33 @@ require_once $currentRoot.'/dbbase.class.php';
  */
 class dbPersonal extends dbBaseClass
 {
-	/**
-	 * @see dbBaseClass
-	 * @var string
-	 */
-	protected $pv_tableName = 'personal';
+    /**
+     * @see dbBaseClass
+     * @var string
+     */
+    protected $pv_tableName = 'personal';
 
-	/**
-	 * @see dbBaseClass
-	 * @var string
-	 */
-	protected $pv_defaultOrderSql = 'ORDER BY nazwisko, imie';
+    /**
+     * @see dbBaseClass
+     * @var string
+     */
+    protected $pv_defaultOrderSql = 'ORDER BY nazwisko, imie';
 
-	/**
-	 * @see dbBaseClass
-	 * @var array
-	 */
-	protected $pv_aliasNames2colNames = array (
-		'id' => 'id',
-		'dt' => 'dt',
-		'ankieta_id' => 'ankieta_id',
-		
-		'nazwisko_imie' => 'CONCAT(nazwisko, \', \', imie)',
-		'imie' => 'imie',
-		'nazwisko' => 'nazwisko',
-		'nr_tel' => 'nr_tel',
-		'e_mail' => 'e_mail',
-	);
+    /**
+     * @see dbBaseClass
+     * @var array
+     */
+    protected $pv_aliasNames2colNames = array (
+    'id' => 'id',
+    'dt' => 'dt',
+    'ankieta_id' => 'ankieta_id',
+        
+    'nazwisko_imie' => 'CONCAT(nazwisko, \', \', imie)',
+    'imie' => 'imie',
+    'nazwisko' => 'nazwisko',
+    'nr_tel' => 'nr_tel',
+    'e_mail' => 'e_mail',
+    );
 }
 
 ?>

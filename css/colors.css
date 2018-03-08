@@ -1,56 +1,56 @@
 /*
-	Colors.
+    Colors.
 
-	Gradients editor:
-	http://www.colorzilla.com/gradient-editor/
+    Gradients editor:
+    http://www.colorzilla.com/gradient-editor/
 */
 
 html
 {
-	background-color: #eef;
+    background-color: #eef;
 }
 
 /* content */
 #container #content
 {
-	background-color:white;
+    background-color:white;
 }
 
 /* header & footer */
 #header
 {
-	border-bottom: 1px solid #ddd;
-	background-color:#fefcea;
+    border-bottom: 1px solid #ddd;
+    background-color:#fefcea;
 }
 #header a
 {
-	color: #333;
+    color: #333;
 }
 #footer
 {
-	border-top: 1px solid #eee;
-	color: #333;
-	background-color: whitesmoke;
+    border-top: 1px solid #eee;
+    color: #333;
+    background-color: whitesmoke;
 }
 
 /* menu */
 #menu a
 {
-	color:black;
+    color:black;
 }
 #menu a:hover
 {
-	color:#903;
+    color:#903;
 }
 body
 {
-	background-color:whitesmoke;
+    background-color:whitesmoke;
 }
 
 /* ticks */
 #footer #ticks
 {
-	color: #9a9;
+    color: #9a9;
 }
 
 /* tables */
@@ -58,13 +58,14 @@ body
 ,#content table td
 ,#content table th
 {
-	border:1px solid #336;
+    border:1px solid #336;
 }
 #content table
 {
-	background-color:#fff;
+    background-color:#fff;
 }
 #content table th
 {
-	background-color:#ecf4ff;
+    background-color:#ecf4ff;
 }
+

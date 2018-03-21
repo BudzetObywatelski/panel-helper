@@ -167,3 +167,79 @@ body #ticks li:first-child:before
     vertical-align: bottom;
 }
 
+.uploader{
+    display: inline-block;
+    border: dashed #cccccc 1px;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+h2{
+    border-bottom: solid #cccccc 1px;
+    padding-bottom: 3px;
+}
+
+.bar{
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+.bar h3, .bar p{
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.bar.error{
+    background: #ff4f4f;
+}
+
+.bar.success{
+    background: #51da51;
+}
+
+.form{
+    display: inline-block;
+    width: auto;
+    max-width: 500px;
+}
+
+.form [type="submit"]{
+    float: right;
+}
+
+.form-control{
+    display: inline-block;
+    min-width: 500px;
+    width: auto;
+}
+
+.form-control label{
+    width: 190px;
+    display: inline-block;
+    min-width: 190px;
+    float: left;
+}
+
+.form-control input, .form-control select{
+    border: solid #cccccc 1px;
+    width: 300px;
+    max-width: 300px;
+    border-radius: 4px;
+    float: left;
+}
+
+.btn{
+    border: solid #eb8f00 1px;
+    color: #eb8f00;
+    border-radius: 4px;
+    padding: 0px 3px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bolder;
+    transition: .5s;
+}
+
+.btn:hover{
+    opacity: .5;
+    transition: .5s;
+}

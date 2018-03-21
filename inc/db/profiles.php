@@ -25,7 +25,13 @@ class dbProfiles extends dbBaseClass
      * @see dbBaseClass
      * @var array
      */
-    protected $pv_aliasNames2colNames = array ('id' => 'id');
+    protected $pv_aliasNames2colNames = array (
+    'id' => 'id',
+    'sex' => 'sex',
+    'quarter' => 'quarter',
+    'age' => 'age',
+    'education' => 'education'
+    );
 
 
 	public static $actions = array('podgląd', 'dodaj', 'import');

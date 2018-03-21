@@ -64,8 +64,13 @@ body
 {
     background-color:#fff;
 }
-#content table th
+#content table tr:nth-child(2n)
 {
     background-color:#ecf4ff;
+}
+
+#content table thead
+{
+    background-color: #b6d5ff;
 }
 

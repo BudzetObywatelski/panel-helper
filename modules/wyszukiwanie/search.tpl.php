@@ -87,6 +87,19 @@
     </ul>
 </div>
 <form id="search" method="post" action="" class="draw-history-profile-form">
+    <h3>Szukanie po profilu:</h3>
+    <div>
+        <label>Profile</label>
+        <select name="profiles">
+        <option value="default">Wybierz...</option>
+        <?php 
+            foreach ($tplData['getprofiles'] as $keyP => $profile) {
+                if($profile['id'] == $tplData['checkedProfile']){echo '<option selected';}else{echo '<option';} echo' value="'.$profile['id'].'">'.$profile['id'].' / '.$profile['quarter'].' / '.$profile['sex'].' / '.$profile['age'].' / '.$profile['education'].' </option>';
+            }
+        ?>
+        </select>
+    </div>
+    <h3>Szukanie po kryteriach:</h3>
     <div>
         <label>Płeć</label>
         <div class="buttonset">

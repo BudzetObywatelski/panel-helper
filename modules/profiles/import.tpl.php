@@ -1,3 +1,4 @@
+<h2>Import profili</h2>
 <?php 
 if(!empty($tplData['errors'])){
 	foreach ($tplData['errors'] as $keyE => $error) {
@@ -18,6 +19,8 @@ foreach ($tplData['success'] as $keys => $success) {
 <?php
 }} ?>
 <form action="?mod=profiles&a=import" method="POST" enctype="multipart/form-data">
-	<input type="file" name="file">
+	<div class="uploader">
+		<input type="file" name="file">
+	</div>
 	<input type="submit" name="send">
 </form>

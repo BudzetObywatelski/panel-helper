@@ -7,3 +7,6 @@
 key.js
 __DB.sql
 \!_*.bat
+phpcs.phar
+phpcbf.phar
+.project

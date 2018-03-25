@@ -9,7 +9,7 @@ require_once $currentRoot.'/dbbase.class.php';
  */
 class dbProfiles extends dbBaseClass
 {
-	/**
+    /**
      * @see dbBaseClass
      * @var string
      */
@@ -34,5 +34,5 @@ class dbProfiles extends dbBaseClass
     );
 
 
-	public static $actions = array('podgląd', 'dodaj', 'import');
+    public static $actions = array('podgląd', 'dodaj', 'import');
 }
